@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Image Generator</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="static/style.css">
+  <style>
+    body, html {
+      margin: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column; /* stack containers vertically */
+      align-items: center;
+      justify-content: flex-start;
+      color: #fff;
+      padding: 40px 0;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 3rem 2rem;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 24px;
+      box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.2),
+        0 0 0 1px rgba(255, 255, 255, 0.05);
+      color: #fff;
+      text-align: center;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .container:hover {
+      transform: translateY(-4px);
+      box-shadow:
+        0 12px 40px rgba(0, 0, 0, 0.3),
+        0 0 0 1px rgba(255, 255, 255, 0.1);
+    }
+
+    .form-title {
+      font-size: 1.8em;
+      font-weight: bold;
+      color: #e0e0ff;
+      text-shadow: 0 0 8px rgba(123, 47, 247, 0.4);
+      margin-bottom: 20px;
+    }
+
+    .form-group textarea {
+      resize: auto;
+      min-height: 60px;
+      max-width: 100%;
+      width: 100%;
+      font-size: 0.9em;
+      border-radius: 10px;
+      padding: 10px;
+    }
+
+    textarea:focus {
+      outline: none;
+      border-color: rgba(168, 85, 247, 0.6);
+      box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.2);
+      background: rgba(255, 255, 255, 0.8);
+    }
+
+    .btn-generate {
+      display: inline-block;
+      padding: 12px 28px;
+      margin-top: 20px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #fff;
+      background: linear-gradient(135deg, #7b2ff7, #f107a3);
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(123, 47, 247, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .btn-generate:hover {
+      opacity: 0.8;
+    }
+
+    .btn-generate:active {
+      background: rgb(0, 204, 255);
+    }
+
+    .btn-generate:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(123, 47, 247, 0.3);
+    }
+
+    .image-result {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .image-result img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .placeholder-text {
+      color: #888;
+      font-size: 0.9em;
+      font-style: italic;
+    }
+
+.container {
+  width: 95%;                 /* take up more width */
+  max-width: 1200px;          /* increased from 900px */
+  margin: 40px auto;
+  padding: 3rem 3rem;         /* more inner spacing */
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 24px;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.2),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+  color: #fff;
+  text-align: center;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.container:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.my-container {
+  width: 95%;                 /* take up more width */
+  max-width: 1200px;          /* increased from 900px */
+  margin: 40px auto;
+  padding: 2.5rem 3rem;       /* more inner spacing */
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 24px;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.2),
+    0 0 20px rgba(123, 47, 247, 0.3),
+    0 0 40px rgba(123, 47, 247, 0.2);
+  text-align: center;
+  color: #fff;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.my-container:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.4),
+    0 0 40px rgba(123, 47, 247, 0.4);
+}
+
+    .my-container h2 {
+      font-size: 1.6rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: #e0e0ff;
+      text-shadow: 0 0 8px rgba(123, 47, 247, 0.4);
+    }
+
+    .my-container img {
+      max-width: 45%;
+      margin: 10px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .my-container img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(123, 47, 247, 0.6);
+    }
+
+    @media (max-width: 600px) {
+      .my-container img {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+</head>
+<body>
+    <div class="container">
+        <div class="form-title text-center mt-4 mb-3">
+            <h2>AI Image Generator</h2>
+        </div>
+        <form id="generate-form">
+            <div class="form-group">
+                <textarea id="text-input" name="text" class="form-control" placeholder="Enter your prompt..."></textarea>
+            </div>
+            <div class="text-center">
+                <button type="button" class="btn btn-primary btn-generate" onclick="generateImage()">Generate Image</button>
+            </div>
+        </form>
+
+        <div id="image-result" class="image-result mt-4 text-center">
+            <!-- Placeholder text or generated image -->
+            <p class="placeholder-text">Your generated image will appear here.</p>
+        </div>
+    </div>
+  <!-- Sample images container, placed BELOW the main container -->
+    <div class="my-container">
+        <h2>✨ Some Sample Images</h2>
+        <img src="sample 1.png" alt="Image 1" style="width:300px; height:auto;">
+        <img src="sample 2.png" alt="Image 2" style="width:300px; height:auto;">
+    </div>
+    <script>
+        function generateImage() {
+            const text = document.getElementById('text-input').value;
+
+            fetch('/generate-image', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `text=${encodeURIComponent(text)}`
+            })
+            .then(response => response.blob())
+            .then(imageBlob => {
+                const imageUrl = URL.createObjectURL(imageBlob);
+                const imageResult = document.getElementById('image-result');
+                imageResult.innerHTML = `<img src="${imageUrl}" alt="Generated Image">`;
+            })
+            .catch(error => {
+                const imageResult = document.getElementById('image-result');
+                imageResult.innerHTML = `<p class="text-danger">Failed to generate image. Please try again.</p>`;
+            });
+        }
+    </script>
+</body>
+</html>
