@@ -13,7 +13,7 @@
       background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
       min-height: 100vh;
       display: flex;
-      flex-direction: column; /* stack containers vertically */
+      flex-direction: column;
       align-items: center;
       justify-content: flex-start;
       color: #fff;
@@ -119,10 +119,10 @@
     }
 
 .container {
-  width: 95%;                 /* take up more width */
-  max-width: 1200px;          /* increased from 900px */
+  width: 95%;                
+  max-width: 1200px;        
   margin: 40px auto;
-  padding: 3rem 3rem;         /* more inner spacing */
+  padding: 3rem 3rem;        
   background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
@@ -144,10 +144,10 @@
 }
 
 .my-container {
-  width: 95%;                 /* take up more width */
-  max-width: 1200px;          /* increased from 900px */
+  width: 95%;               
+  max-width: 1200px;          
   margin: 40px auto;
-  padding: 2.5rem 3rem;       /* more inner spacing */
+  padding: 2.5rem 3rem;     
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
@@ -219,12 +219,8 @@
             <p class="placeholder-text">Your generated image will appear here.</p>
         </div>
     </div>
-  <!-- Sample images container, placed BELOW the main container -->
-    <div class="my-container">
-        <h2>✨ Some Sample Images</h2>
-        <img src="sample 1.png" alt="Image 1" style="width:300px; height:auto;">
-        <img src="sample 2.png" alt="Image 2" style="width:300px; height:auto;">
-    </div>
+
+
     <script>
         function generateImage() {
             const text = document.getElementById('text-input').value;
